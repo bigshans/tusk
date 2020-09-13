@@ -127,4 +127,10 @@ app.on('before-quit', () => {
   if (!mainWindow.isFullScreen()) {
     settings.set('lastWindowState', mainWindow.getBounds());
   }
+  let lastUrl = mainWindow.getURL();
+  if (lastUrl.indexOf('yinxiang') > -1) {
+    settings.set('useYinxiang', true);
+  } else {
+    settings.set('useYinXiang', false);
+  }
 });

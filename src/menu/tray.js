@@ -82,20 +82,20 @@ module.exports = [
     type: 'separator'
   }, {
     label: 'Evernote Settings',
-    click() {
-      shell.openExternal(url.settings);
+    async click() {
+      await shell.openExternal(url.settings);
     }
   }, {
     label: 'Report Issue',
-    click() {
-      shell.openExternal(url.issue);
+    async click() {
+      await shell.openExternal(url.issue);
     }
   }, {
     type: 'separator'
   }, {
     label: 'Exit',
-    click() {
-      dialog.confirmExit();
+    async click() {
+      await dialog.confirmExit();
     }
   }
 ];

@@ -79,9 +79,10 @@ class Dialog {
     }
   }
 
-  confirmExit() {
+  async confirmExit() {
     if (settings.get('requestExitConfirmation')) {
-      if (this._exit() === 0) {
+      let exit = await this._exit();
+      if (exit.response === 0) {
         app.quit();
       }
     } else {
@@ -89,16 +90,16 @@ class Dialog {
     }
   }
 
-  confirmActivationRestart(option, state) {
-    if (this._restart() === 0) {
+  async confirmActivationRestart(option, state) {
+    if ((await this._restart()).response === 0) {
       settings.set(option, state);
       app.quit();
       app.relaunch();
     }
   }
 
-  confirmSignOut() {
-    if (this._signOut() === 0) {
+  async confirmSignOut() {
+    if ((await this._signOut()).response === 0) {
       activate('log-out');
     }
   }
@@ -116,9 +117,9 @@ class Dialog {
     });
   }
 
-  getUpdate(version) {
-    if (this._update(version) === 0) {
-      shell.openExternal(release);
+  async getUpdate(version) {
+    if ((await this._update(version)).response === 0) {
+      await shell.openExternal(release);
     }
   }
 }
